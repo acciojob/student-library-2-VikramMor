@@ -9,30 +9,30 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/student")
 public class StudentController {
 
-    @
+    @GetMapping("/studentByEmail")
     public ResponseEntity getStudentByEmail(@RequestParam("email") String email){
         return new ResponseEntity<>("Student details printed successfully ", HttpStatus.OK);
     }
 
-    //Add required annotations
+    @GetMapping("/studentById")
     public ResponseEntity getStudentById(@RequestParam("id") int id){
 
         return new ResponseEntity<>("Student details printed successfully ", HttpStatus.OK);
     }
 
-    //Add required annotations
+    @PostMapping("/")
     public ResponseEntity createStudent(@RequestBody Student student){
 
         return new ResponseEntity<>("the student is successfully added to the system", HttpStatus.CREATED);
     }
 
-    //Add required annotations
+    @PutMapping("/")
     public ResponseEntity updateStudent(@RequestBody Student student){
 
         return new ResponseEntity<>("student is updated", HttpStatus.ACCEPTED);
     }
 
-    //Add required annotations
+    @DeleteMapping("/")
     public ResponseEntity deleteStudent(@RequestParam("id") int id){
 
         return new ResponseEntity<>("student is deleted", HttpStatus.ACCEPTED);
