@@ -5,10 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-//Add required annotations
+@RestController
+@RequestMapping("/student")
 public class StudentController {
 
-    //Add required annotations
+    @
     public ResponseEntity getStudentByEmail(@RequestParam("email") String email){
         return new ResponseEntity<>("Student details printed successfully ", HttpStatus.OK);
     }
