@@ -8,21 +8,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/transaction")
 public class TransactionController {
 
     @Autowired
     TransactionService transactionService;
 
-    @PostMapping("/issueBook")
-    public ResponseEntity issueBook(@RequestParam("cardId") int cardId, @RequestParam("bookId") int bookId) throws Exception{
-        String externalTransactionId = transactionService.issueBook(cardId, bookId);
-        return new ResponseEntity<>("transaction completed, here is your transactionId - " + externalTransactionId, HttpStatus.ACCEPTED);
+    @PostMapping("/transaction/issueBook")
+    public ResponseEntity<String> issueBook(@RequestParam("cardId") int cardId, @RequestParam("bookId") int bookId) throws Exception{
+        String id=transactionService.issueBook(cardId, bookId);
+        return new ResponseEntity<>(id, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/returnBook")
-    public ResponseEntity returnBook(@RequestParam("cardId") int cardId, @RequestParam("bookId") int bookId) throws Exception{
-        Transaction externalTransaction = transactionService.returnBook(cardId, bookId);
-        return new ResponseEntity<>("transaction completed, here is your transactionId - " + externalTransaction.getTransactionId(), HttpStatus.ACCEPTED);
+    @PostMapping("/transaction/returnBook")
+    public ResponseEntity<Transaction> returnBook(@RequestParam("cardId") int cardId, @RequestParam("bookId") int bookId) throws Exception{
+        Transaction transaction=transactionService.returnBook(cardId, bookId);
+        return new ResponseEntity<Transaction>(transaction, HttpStatus.ACCEPTED);
     }
 }

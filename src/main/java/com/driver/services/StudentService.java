@@ -9,30 +9,37 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentService {
 
-    @Autowired
-    CardService cardService;
 
     @Autowired
-    StudentRepository studentRepository;
+    CardService cardService4;
+
+    @Autowired
+    StudentRepository studentRepository4;
 
     public Student getDetailsByEmail(String email){
-        return studentRepository.findByEmailId(email);
+        Student student = studentRepository4.findByEmailId(email);
+
+        return student;
     }
 
     public Student getDetailsById(int id){
-        return studentRepository.findById(id).get();
+        Student student = studentRepository4.findById(id).get();
+
+        return student;
     }
 
     public void createStudent(Student student){
-        Card Card = cardService.createAndReturn(student);
+        cardService4.createAndReturn(student);
+        studentRepository4.save(student);
     }
 
     public void updateStudent(Student student){
-        studentRepository.updateStudentDetails(student);
+        studentRepository4.save(student);
     }
 
     public void deleteStudent(int id){
-        cardService.deactivateCard(id);
-        studentRepository.deleteCustom(id);
+        studentRepository4.deleteById(id);
+        cardService4.deactivateCard(id);
+        //Delete student and deactivate corresponding card
     }
 }
