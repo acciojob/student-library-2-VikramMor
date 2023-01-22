@@ -8,13 +8,14 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
+@Table
 public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String transactionId = UUID.randomUUID().toString(); // externalId
+    private String transactionId = UUID.randomUUID().toString();
 
     @ManyToOne
     @JoinColumn
@@ -36,6 +37,11 @@ public class Transaction {
 
     @CreationTimestamp
     private Date transactionDate;
+
+    public Transaction() {
+    }
+
+
 
     public String getTransactionId() {
         return transactionId;

@@ -6,12 +6,13 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-
+@Table
 public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
 
     @Column(unique = true)
@@ -73,5 +74,13 @@ public class Author {
 
     public List<Book> getBooksWritten() {
         return booksWritten;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setBooksWritten(List<Book> booksWritten) {
+        this.booksWritten = booksWritten;
     }
 }

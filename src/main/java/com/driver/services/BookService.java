@@ -21,30 +21,36 @@ public class BookService {
     AuthorRepository authorRepository;
 
     public void createBook(Book book) {
-        int authorId = book.getAuthor().getId();
-        Author author = authorRepository.findById(authorId).get();
-        author.getBooksWritten().add(book);
-        book.setAuthor(author);
-        authorRepository.save(author);
+        try
+        {
+            int authorId = book.getAuthor().getId();
+            Author author = authorRepository.findById(authorId).get();
+            List<Book> bookList = author.getBooksWritten();
+            if(bookList==null) {
+                bookList = new ArrayList<>();
+            }
+            bookList.add(book);
+            book.setAuthor(author);
+            author.setBooksWritten(bookList);
+            authorRepository.save(author);
+        }
+        catch(Exception e) {
+            bookRepository2.save(book);
+        }
     }
 
     public List<Book> getBooks(String genre, boolean available, String author) {
-        List<Book> temp = bookRepository2.findByAvailability(available);
-        List<Book> books = new ArrayList<>();
-        Genre gen = Genre.valueOf(genre);
-        for (Book b : temp) {
-            if (author == null) {
+        List<Book> books;
 
-                if (b.getGenre().equals(gen)) {
-                    books.add(b);
-                }
-            } else {
-                if (b.getGenre().equals(gen) && b.getAuthor().getName().equalsIgnoreCase(author)) {
-                    books.add(b);
-                }
-            }
+        if(genre != null && author != null){
+            books = bookRepository2.findBooksByGenreAuthor(genre, author, available);
+        }else if(genre != null){
+            books = bookRepository2.findBooksByGenre(genre, available);
+        }else if(author != null){
+            books = bookRepository2.findBooksByAuthor(author, available);
+        }else{
+            books = bookRepository2.findByAvailability(available);
         }
-        // find the elements of the list by yourself
         return books;
     }
 }

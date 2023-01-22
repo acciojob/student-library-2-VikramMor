@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table
 public class Student {
 
     @Id
@@ -16,10 +17,23 @@ public class Student {
 
     @Column(unique = true)
     private String emailId;
+
     private String name;
-    private int age; // in case we want to check on the basis of age while issuing
+
+    private int age;
 
     private String country;
+
+    @CreationTimestamp
+    private Date createdOn;
+
+    @UpdateTimestamp
+    private Date updatedOn;
+
+    @OneToOne
+    @JoinColumn
+    @JsonIgnoreProperties("student")
+    private Card card;
 
     public Student() {
     }
@@ -31,19 +45,6 @@ public class Student {
         this.country = country;
     }
 
-    // alter table student add foreign key constraint card references Card(id)
-
-    @OneToOne
-    @JoinColumn   // join this column to the primary key of Card table
-    @JsonIgnoreProperties("student")
-    private Card card;
-
-
-    @CreationTimestamp
-    private Date createdOn;
-
-    @UpdateTimestamp
-    private Date updatedOn;
 
     public int getId() {
         return id;

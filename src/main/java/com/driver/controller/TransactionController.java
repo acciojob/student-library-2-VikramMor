@@ -8,18 +8,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/transaction")
 public class TransactionController {
 
     @Autowired
     TransactionService transactionService;
 
-    @PostMapping("/transaction/issueBook")
+    @PostMapping("/issueBook")
     public ResponseEntity<String> issueBook(@RequestParam("cardId") int cardId, @RequestParam("bookId") int bookId) throws Exception{
-        String id=transactionService.issueBook(cardId, bookId);
-        return new ResponseEntity<>(id, HttpStatus.ACCEPTED);
+        String response=transactionService.issueBook(cardId, bookId);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/transaction/returnBook")
+    @PostMapping("/returnBook")
     public ResponseEntity<Transaction> returnBook(@RequestParam("cardId") int cardId, @RequestParam("bookId") int bookId) throws Exception{
         Transaction transaction=transactionService.returnBook(cardId, bookId);
         return new ResponseEntity<Transaction>(transaction, HttpStatus.ACCEPTED);
