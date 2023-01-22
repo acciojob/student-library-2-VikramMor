@@ -26,13 +26,13 @@ public class TransactionService {
     TransactionRepository transactionRepository5;
 
     @Value("${books.max_allowed}")
-    int max_allowed_books;
+    public int max_allowed_books;
 
     @Value("${books.max_allowed_days}")
-    int getMax_allowed_days;
+    public int getMax_allowed_days;
 
     @Value("${books.fine.per_day}")
-    int fine_per_day;
+    public int fine_per_day;
 
 //    public int getMax_allowed_books() {
 //        return max_allowed_books;
