@@ -26,37 +26,37 @@ public class TransactionService {
     TransactionRepository transactionRepository5;
 
     @Value("${books.max_allowed}")
-    private int max_allowed_books;
+    int max_allowed_books;
 
     @Value("${books.max_allowed_days}")
-    private int getMax_allowed_days;
+    int getMax_allowed_days;
 
     @Value("${books.fine.per_day}")
-    private int fine_per_day;
+    int fine_per_day;
 
-    public int getMax_allowed_books() {
-        return max_allowed_books;
-    }
-
-    public void setMax_allowed_books(int max_allowed_books) {
-        this.max_allowed_books = max_allowed_books;
-    }
-
-    public int getGetMax_allowed_days() {
-        return getMax_allowed_days;
-    }
-
-    public void setGetMax_allowed_days(int getMax_allowed_days) {
-        this.getMax_allowed_days = getMax_allowed_days;
-    }
-
-    public int getFine_per_day() {
-        return fine_per_day;
-    }
-
-    public void setFine_per_day(int fine_per_day) {
-        this.fine_per_day = fine_per_day;
-    }
+//    public int getMax_allowed_books() {
+//        return max_allowed_books;
+//    }
+//
+//    public void setMax_allowed_books(int max_allowed_books) {
+//        this.max_allowed_books = max_allowed_books;
+//    }
+//
+//    public int getGetMax_allowed_days() {
+//        return getMax_allowed_days;
+//    }
+//
+//    public void setGetMax_allowed_days(int getMax_allowed_days) {
+//        this.getMax_allowed_days = getMax_allowed_days;
+//    }
+//
+//    public int getFine_per_day() {
+//        return fine_per_day;
+//    }
+//
+//    public void setFine_per_day(int fine_per_day) {
+//        this.fine_per_day = fine_per_day;
+//    }
 
     public String issueBook(int cardId, int bookId) throws Exception {
 
